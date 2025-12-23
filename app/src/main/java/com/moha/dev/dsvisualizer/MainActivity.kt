@@ -4,13 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.moha.dev.dsvisualizer.ui.screens.ExplanationSection
+import com.moha.dev.dsvisualizer.ui.screens.VisualizationArea
+import com.moha.dev.dsvisualizer.ui.screens.VisualizerTopBar
 import com.moha.dev.dsvisualizer.ui.theme.DSVisualizerTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +25,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            DSVisualizerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            MaterialTheme(
+                colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
+            ) {
+                VisualizerTopBar()
+                //   VisualizationArea(content)
+                //  ExplanationSection(text,code)
             }
         }
+//            DSVisualizerTheme {
+//
+//
+//
+//            }
+        }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DSVisualizerTheme {
-        Greeting("Android")
-    }
-}
+
+
+
+
